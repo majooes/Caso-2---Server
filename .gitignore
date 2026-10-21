@@ -1,0 +1,20 @@
+# Maven
+target/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Java
+*.class
+*.log
+*.jar
+hs_err_pid*
+
+# Sistema
+.DS_Store
+Thumbs.db
