@@ -29,9 +29,12 @@ public final class Constantes {
 
     // Reglas de juego
     public static final double RADIO_ENCUENTRO = 30.0;
+    public static final double RADIO_TAZA = 30.0;
+    public static final double RADIO_BANDERA = 30.0;
     public static final double VELOCIDAD_ANIMAL = 80.0;
     public static final long ENFRIAMIENTO_ATAQUE_MS = 1000;
     public static final int BOTS_POR_BONO_ENERGIA = 2;
+    public static final int ID_SIN_JUGADOR = 0;
 
     private Constantes() {
         // Evita que se creen objetos de esta clase.
