@@ -31,7 +31,7 @@ public abstract class Animal extends Entidad implements Actualizable {
         if (!estaVivo()) {
             return;
         }
-        double paso = Constantes.VELOCIDAD_ANIMAL * deltaMs / 1000.0;
+        double paso = Constantes.VELOCIDAD_ANIMAL * deltaMs / Constantes.MS_POR_SEGUNDO;
         while (paso > 0 && !ruta.isEmpty()) {
             Punto destino = ruta.get(0);
             double distancia = getPosicion().distanciaA(destino);

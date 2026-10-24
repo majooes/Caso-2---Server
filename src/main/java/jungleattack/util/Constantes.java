@@ -15,6 +15,14 @@ public final class Constantes {
     public static final int TOTAL_ESPECIES = 7;
     public static final int TOTAL_TAZAS = 10;
     public static final int MS_POR_TICK = 50;
+    public static final double MS_POR_SEGUNDO = 1000.0;
+    public static final int COLUMNAS_MAPA = 4;
+    public static final int FILAS_MAPA = 3;
+    public static final double ANCHO_ZONA = 800.0;
+    public static final double ALTO_ZONA = 600.0;
+    public static final double MARGEN_ZONA = 60.0;
+    public static final double TRAYECTO_MIN = 0.1;
+    public static final double TRAYECTO_MAX = 0.9;
 
     // Manada de jugador
     public static final int MIEMBROS_JUGADOR = 10;
@@ -35,6 +43,7 @@ public final class Constantes {
     public static final long ENFRIAMIENTO_ATAQUE_MS = 1000;
     public static final int BOTS_POR_BONO_ENERGIA = 2;
     public static final int ID_SIN_JUGADOR = 0;
+    public static final int BONO_ENERGIA = 1;
 
     private Constantes() {
         // Evita que se creen objetos de esta clase.
