@@ -15,6 +15,7 @@ public final class Constantes {
     public static final int TOTAL_ESPECIES = 7;
     public static final int TOTAL_TAZAS = 10;
     public static final int MS_POR_TICK = 50;
+    public static final double MS_POR_SEGUNDO = 1000.0;
     public static final int COLUMNAS_MAPA = 4;
     public static final int FILAS_MAPA = 3;
     public static final double ANCHO_ZONA = 800.0;
@@ -40,7 +41,9 @@ public final class Constantes {
     public static final double RADIO_BANDERA = 30.0;
     public static final double VELOCIDAD_ANIMAL = 80.0;
     public static final long ENFRIAMIENTO_ATAQUE_MS = 1000;
+    public static final int BOTS_POR_BONO_ENERGIA = 2;
     public static final int ID_SIN_JUGADOR = 0;
+    public static final int BONO_ENERGIA = 1;
 
     private Constantes() {
         // Evita que se creen objetos de esta clase.
