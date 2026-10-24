@@ -1,7 +1,6 @@
 package jungleattack.mapa;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import jungleattack.modelo.Punto;
@@ -63,5 +62,5 @@ public class Zona {
 
     public int getId() { return id; }
     public Punto getEsquina() { return esquina; }
-    public List<Camino> getCaminos() { return Collections.unmodifiableList(caminos); }
+    public List<Camino> getCaminos() { return caminos; }
 }

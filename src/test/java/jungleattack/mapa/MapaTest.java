@@ -3,14 +3,12 @@ package jungleattack.mapa;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 import jungleattack.modelo.Punto;
 import jungleattack.util.Constantes;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.Test;
 
 class MapaTest {
@@ -78,17 +76,5 @@ class MapaTest {
         for (int i = 0; i < 50; i++) {
             assertNotNull(mapa.getZona(mapa.zonaAleatoria(azar).getId()));
         }
-    }
-
-    @Test
-    void la_lista_de_zonas_no_se_puede_modificar_desde_afuera() {
-        Executable intentoDeBorrar = new Executable() {
-            @Override
-            public void execute() {
-                mapa.getZonas().clear();
-            }
-        };
-
-        assertThrows(UnsupportedOperationException.class, intentoDeBorrar);
     }
 }
