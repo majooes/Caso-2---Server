@@ -1,20 +1,24 @@
 package jungleattack.partida;
 
-/** Resultado de unirse a una partida o de elegir un animal. Reemplaza a las excepciones. */
+import jungleattack.util.Constantes;
+
+/** Resultado de unirse a una partida o de elegir un animal. Así no se usan excepciones para los errores. */
 public enum ResultadoUnirse {
     OK(""),
-    CODIGO_INVALIDO("El código de la partida no existe"),
-    PARTIDA_LLENA("La partida ya tiene dos jugadores"),
-    ESPECIE_TOMADA("Ese animal ya fue elegido por el otro jugador");
+    CODIGO_INVALIDO(Constantes.TEXTO_CODIGO_INVALIDO),
+    PARTIDA_LLENA(Constantes.TEXTO_PARTIDA_LLENA),
+    ESPECIE_TOMADA(Constantes.TEXTO_ESPECIE_TOMADA),
+    ESPECIE_INVALIDA(Constantes.TEXTO_ESPECIE_INVALIDA),
+    ESTADO_INCORRECTO(Constantes.TEXTO_ESTADO_INCORRECTO);
 
-    private final String mensaje;
+    private final String texto;
 
-    ResultadoUnirse(String mensaje) {
-        this.mensaje = mensaje;
+    ResultadoUnirse(String texto) {
+        this.texto = texto;
     }
 
-    /** Texto que se envía al cliente en el mensaje ERROR. */
-    public String getMensaje() {
-        return mensaje;
+    /** Mensaje que se le muestra al jugador cuando no fue OK. */
+    public String getTexto() {
+        return texto;
     }
 }

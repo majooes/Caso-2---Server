@@ -21,4 +21,14 @@ public enum Especie {
     public String getNombre() {
         return nombre;
     }
+
+    /** Devuelve la especie con ese nombre, o null si no existe. */
+    public static Especie buscar(String nombre) {
+        for (Especie e : values()) {
+            if (e.name().equals(nombre)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

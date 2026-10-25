@@ -95,6 +95,9 @@ public final class Constantes {
     public static final String TEXTO_ESTADO_INCORRECTO = "No puedes hacer eso en este momento";
     public static final String TEXTO_RIVAL_DESCONECTADO = "El otro jugador se desconectó";
 
+    public static final String APODO_POR_DEFECTO = "Jugador";
+    public static final int ZONAS_CON_MANADA = 7;
+
     private Constantes() {
         // Evita que se creen objetos de esta clase.
     }

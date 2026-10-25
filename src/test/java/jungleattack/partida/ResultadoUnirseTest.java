@@ -1,22 +1,23 @@
 package jungleattack.partida;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ResultadoUnirseTest {
 
     @Test
-    void tiene_los_cuatro_resultados() {
-        assertEquals(4, ResultadoUnirse.values().length);
-        assertEquals(ResultadoUnirse.PARTIDA_LLENA, ResultadoUnirse.valueOf("PARTIDA_LLENA"));
+    void ok_no_tiene_texto_de_error() {
+        assertEquals("", ResultadoUnirse.OK.getTexto());
     }
 
     @Test
-    void ok_no_tiene_mensaje_y_los_errores_si() {
-        assertTrue(ResultadoUnirse.OK.getMensaje().isEmpty());
-        assertFalse(ResultadoUnirse.CODIGO_INVALIDO.getMensaje().isEmpty());
-        assertFalse(ResultadoUnirse.PARTIDA_LLENA.getMensaje().isEmpty());
-        assertFalse(ResultadoUnirse.ESPECIE_TOMADA.getMensaje().isEmpty());
+    void todos_los_errores_tienen_un_texto_para_el_jugador() {
+        for (ResultadoUnirse r : ResultadoUnirse.values()) {
+            if (r != ResultadoUnirse.OK) {
+                assertFalse(r.getTexto().isEmpty(), r.name());
+            }
+        }
     }
 }
