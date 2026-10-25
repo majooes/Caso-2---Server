@@ -1,29 +1,23 @@
 package jungleattack.eventos;
 
-import jungleattack.red.Mensaje;
-
-/** Un animal se quedó sin energía. */
+/** Murió un animal: de un bot o de uno de los jugadores. */
 public class EventoMuerte extends Evento {
 
-    private final int idAnimal;
-    private final boolean esBot;
-    private final int duenio;
+    private final boolean victimaEsBot;
+    private final int idJugadorVictima;
 
-    /** duenio es SIN_JUGADOR, JUGADOR_A o JUGADOR_B. */
-    public EventoMuerte(long tiempoMs, int idAnimal, boolean esBot, int duenio) {
+    public EventoMuerte(long tiempoMs, boolean victimaEsBot, int idJugadorVictima) {
         super(tiempoMs);
-        this.idAnimal = idAnimal;
-        this.esBot = esBot;
-        this.duenio = duenio;
+        this.victimaEsBot = victimaEsBot;
+        this.idJugadorVictima = idJugadorVictima;
     }
 
-    public int getIdAnimal() { return idAnimal; }
-    public boolean isEsBot() { return esBot; }
-    public int getDuenio() { return duenio; }
-
-    /** El cliente ve que el animal desaparece del estado, no necesita un mensaje aparte. */
     @Override
-    public Mensaje aMensaje() {
-        return null;
+    public void aplicarA(Resumen resumen) {
+        if (victimaEsBot) {
+            resumen.sumarBotEliminado();
+        } else {
+            resumen.sumarAnimalPerdido(idJugadorVictima);
+        }
     }
 }

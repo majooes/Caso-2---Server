@@ -4,51 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Guarda todo lo que pasa en la partida y de ahí saca el resumen final. */
+/** Guarda en orden todo lo que pasó en la partida. */
 public class RegistroEventos {
 
     private final List<Evento> eventos = new ArrayList<>();
-    private int primerNuevo = 0; // posición del primer evento que aún no se ha entregado
 
-    public void agregar(Evento e) {
-        eventos.add(e);
+    public void agregar(Evento evento) {
+        eventos.add(evento);
     }
 
-    /** Eventos agregados desde la última vez que se llamó a este método. */
-    public List<Evento> obtenerNuevos() {
-        List<Evento> nuevos = new ArrayList<>(eventos.subList(primerNuevo, eventos.size()));
-        primerNuevo = eventos.size();
-        return nuevos;
-    }
-
-    /** Cuenta muertes y tazas. La duración es el tiempo del último evento registrado. */
+    /** Recorre los eventos y arma las estadísticas finales. */
     public Resumen construirResumen() {
-        int bots = 0;
-        int perdidosA = 0;
-        int perdidosB = 0;
-        int tazasA = 0;
-        int tazasB = 0;
-        long duracion = 0;
-
+        Resumen resumen = new Resumen();
         for (Evento e : eventos) {
-            duracion = Math.max(duracion, e.getTiempoMs());
-            if (e instanceof EventoMuerte muerte) {
-                if (muerte.isEsBot()) {
-                    bots++;
-                } else if (muerte.getDuenio() == Evento.JUGADOR_A) {
-                    perdidosA++;
-                } else if (muerte.getDuenio() == Evento.JUGADOR_B) {
-                    perdidosB++;
-                }
-            } else if (e instanceof EventoTaza taza) {
-                if (taza.getDuenio() == Evento.JUGADOR_A) {
-                    tazasA++;
-                } else if (taza.getDuenio() == Evento.JUGADOR_B) {
-                    tazasB++;
-                }
-            }
+            e.aplicarA(resumen);
         }
-        return new Resumen(bots, perdidosA, perdidosB, tazasA, tazasB, duracion);
+        return resumen;
     }
 
     public List<Evento> getEventos() {

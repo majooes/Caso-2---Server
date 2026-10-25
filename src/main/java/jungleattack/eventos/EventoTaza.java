@@ -1,26 +1,17 @@
 package jungleattack.eventos;
 
-import jungleattack.red.Mensaje;
-
-/** Un animal consumió una taza de café. */
+/** Un animal de un jugador recogió una taza de café. */
 public class EventoTaza extends Evento {
 
-    private final int idTaza;
-    private final int duenio;
+    private final int idJugador;
 
-    /** duenio es el jugador (JUGADOR_A o JUGADOR_B) que consumió la taza. */
-    public EventoTaza(long tiempoMs, int idTaza, int duenio) {
+    public EventoTaza(long tiempoMs, int idJugador) {
         super(tiempoMs);
-        this.idTaza = idTaza;
-        this.duenio = duenio;
+        this.idJugador = idJugador;
     }
 
-    public int getIdTaza() { return idTaza; }
-    public int getDuenio() { return duenio; }
-
-    /** El cliente ve la taza desaparecer y sube el contador del HUD, sin mensaje aparte. */
     @Override
-    public Mensaje aMensaje() {
-        return null;
+    public void aplicarA(Resumen resumen) {
+        resumen.sumarTaza(idJugador);
     }
 }
