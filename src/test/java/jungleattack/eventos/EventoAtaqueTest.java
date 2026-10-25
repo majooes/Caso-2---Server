@@ -17,7 +17,13 @@ class EventoAtaqueTest {
     }
 
     @Test
-    void no_genera_mensaje_para_el_cliente() {
-        assertNull(new EventoAtaque(0, 1, 2, 1).aMensaje());
+    void no_modifica_el_resumen() {
+        Resumen resumen = new Resumen();
+
+        new EventoAtaque(0, 1, 2, 1).aplicarA(resumen);
+
+        assertEquals(0, resumen.getBotsEliminados());
+        assertEquals(0, resumen.getAnimalesPerdidosA());
+        assertEquals(0, resumen.getAnimalesPerdidosB());
     }
 }

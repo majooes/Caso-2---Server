@@ -1,7 +1,5 @@
 package jungleattack.eventos;
 
-import jungleattack.red.Mensaje;
-
 /** Un animal golpeó a otro. */
 public class EventoAtaque extends Evento {
 
@@ -23,9 +21,5 @@ public class EventoAtaque extends Evento {
     @Override
     public void aplicarA(Resumen resumen) {
         // Un ataque no cambia las estadísticas finales.
-    }
-
-    public Mensaje aMensaje() {
-        return null;
     }
 }

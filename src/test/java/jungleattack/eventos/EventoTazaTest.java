@@ -1,5 +1,6 @@
 package jungleattack.eventos;
 
+import jungleattack.util.Constantes;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,16 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventoTazaTest {
 
     @Test
-    void guarda_sus_datos() {
-        EventoTaza e = new EventoTaza(1200, 4, Evento.JUGADOR_B);
+    void suma_una_taza_al_jugador() {
+        EventoTaza evento = new EventoTaza(1200, Constantes.ID_JUGADOR_2);
+        Resumen resumen = new Resumen();
 
-        assertEquals(1200, e.getTiempoMs());
-        assertEquals(4, e.getIdTaza());
-        assertEquals(Evento.JUGADOR_B, e.getDuenio());
-    }
+        assertEquals(1200, evento.getTiempoMs());
+        evento.aplicarA(resumen);
 
-    @Test
-    void no_genera_mensaje_para_el_cliente() {
-        assertNull(new EventoTaza(0, 1, Evento.JUGADOR_A).aMensaje());
+        assertEquals(0, resumen.getTazasA());
+        assertEquals(1, resumen.getTazasB());
     }
 }
