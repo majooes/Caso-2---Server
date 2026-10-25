@@ -4,13 +4,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import jungleattack.util.Constantes;
 
 /** Mensaje con formato {"type": "...", "payload": {...}}. Se envía una línea por mensaje. */
 public class Mensaje {
-
-    // Claves del sobre JSON: deben ser iguales a las del cliente
-    private static final String CLAVE_TIPO = "type";
-    private static final String CLAVE_CARGA = "payload";
 
     private final TipoMensaje tipo;
     private final JsonObject carga;
@@ -31,30 +28,41 @@ public class Mensaje {
     /** Convierte el mensaje a una línea de JSON. */
     public String aJson() {
         JsonObject sobre = new JsonObject();
-        sobre.addProperty(CLAVE_TIPO, tipo.name());
-        sobre.add(CLAVE_CARGA, carga);
+        sobre.addProperty(Constantes.JSON_TIPO, tipo.name());
+        sobre.add(Constantes.JSON_CARGA, carga);
         return sobre.toString();
     }
 
-    /** Lee un mensaje desde JSON. Si el texto es inválido devuelve null (sin excepciones). */
+    /**
+     * Lee un mensaje desde JSON. Si el texto es inválido devuelve null.
+     * El try/catch solo cubre el análisis del texto; el resto se valida con if.
+     */
     public static Mensaje desdeJson(String json) {
         if (json == null) {
             return null;
         }
+        JsonElement raiz;
         try {
-            JsonObject sobre = JsonParser.parseString(json).getAsJsonObject();
-            JsonElement elementoTipo = sobre.get(CLAVE_TIPO);
-            if (elementoTipo == null) {
-                return null;
-            }
-            TipoMensaje tipo = TipoMensaje.valueOf(elementoTipo.getAsString());
-            JsonElement elementoCarga = sobre.get(CLAVE_CARGA);
-            JsonObject carga = (elementoCarga != null && elementoCarga.isJsonObject())
-                    ? elementoCarga.getAsJsonObject()
-                    : new JsonObject();
-            return new Mensaje(tipo, carga);
-        } catch (JsonParseException | IllegalStateException | IllegalArgumentException e) {
-            return null; // JSON roto o tipo desconocido
+            raiz = JsonParser.parseString(json);
+        } catch (JsonParseException e) {
+            return null; // texto que no es JSON
         }
+        if (!raiz.isJsonObject()) {
+            return null;
+        }
+        JsonObject sobre = raiz.getAsJsonObject();
+        JsonElement elementoTipo = sobre.get(Constantes.JSON_TIPO);
+        if (elementoTipo == null || !elementoTipo.isJsonPrimitive()) {
+            return null;
+        }
+        TipoMensaje tipo = TipoMensaje.buscar(elementoTipo.getAsString());
+        if (tipo == null) {
+            return null; // tipo desconocido
+        }
+        JsonElement elementoCarga = sobre.get(Constantes.JSON_CARGA);
+        JsonObject carga = (elementoCarga != null && elementoCarga.isJsonObject())
+                ? elementoCarga.getAsJsonObject()
+                : new JsonObject();
+        return new Mensaje(tipo, carga);
     }
 }
