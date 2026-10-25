@@ -1,6 +1,6 @@
 package jungleattack.eventos;
 
-import jungleattack.red.Mensaje;
+
 
 /** Un animal golpeó a otro. */
 public class EventoAtaque extends Evento {
@@ -20,9 +20,8 @@ public class EventoAtaque extends Evento {
     public int getIdObjetivo() { return idObjetivo; }
     public int getDanio() { return danio; }
 
-    /** El cliente se entera del ataque por el estado completo, no por un mensaje aparte. */
-    @Override
-    public Mensaje aMensaje() {
-        return null;
-    }
+   @Override
+   public void aplicarA(Resumen resumen) {
+       // Un ataque no cambia las estadísticas finales.
+   }
 }
