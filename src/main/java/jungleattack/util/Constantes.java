@@ -39,6 +39,7 @@ public final class Constantes {
     public static final double RADIO_ENCUENTRO = 30.0;
     public static final double RADIO_TAZA = 30.0;
     public static final double RADIO_BANDERA = 30.0;
+    public static final double RADIO_PUERTA = 60.0;
     public static final double VELOCIDAD_ANIMAL = 80.0;
     public static final long ENFRIAMIENTO_ATAQUE_MS = 1000;
     public static final int BOTS_POR_BONO_ENERGIA = 2;
@@ -97,6 +98,10 @@ public final class Constantes {
 
     public static final String APODO_POR_DEFECTO = "Jugador";
     public static final int ZONAS_CON_MANADA = 7;
+
+    // Textos de la consola del servidor
+    public static final String TEXTO_SERVIDOR_LISTO = "Servidor de Jungle Attack escuchando en el puerto %d";
+    public static final String TEXTO_PUERTO_OCUPADO = "No se pudo abrir el puerto %d (¿ya hay otro servidor?)";
 
     private Constantes() {
         // Evita que se creen objetos de esta clase.

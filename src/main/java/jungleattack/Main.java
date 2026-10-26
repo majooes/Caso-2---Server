@@ -1,12 +1,19 @@
 package jungleattack;
 
-/**
- * Punto de entrada del servidor de Jungle Attack.
- * Por ahora solo confirma que el proyecto compila; el servidor se agrega después.
- */
+import jungleattack.conexion.Servidor;
+import jungleattack.partida.GestorPartidas;
+import jungleattack.util.Constantes;
+
+/** Punto de entrada del servidor de Jungle Attack. */
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Servidor de Jungle Attack");
+        Servidor servidor = new Servidor(Constantes.PUERTO, GestorPartidas.obtenerInstancia());
+        if (servidor.abrir()) {
+            System.out.println(String.format(Constantes.TEXTO_SERVIDOR_LISTO, Constantes.PUERTO));
+            servidor.atender();
+        } else {
+            System.out.println(String.format(Constantes.TEXTO_PUERTO_OCUPADO, Constantes.PUERTO));
+        }
     }
 }
